@@ -294,7 +294,7 @@ public class ChallengeRunner {
                     And expected output was:
                     %s
                     But actual output was:
-                    %s""", testInput.getName(), testInputString, testInputString, actualOutput);
+                    %s""", testInput.getName(), testInputString, testOutputString, actualOutput);
             throw new AssertionError(message);
         }
 

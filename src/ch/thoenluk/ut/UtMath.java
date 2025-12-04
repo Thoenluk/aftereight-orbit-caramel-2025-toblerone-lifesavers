@@ -104,6 +104,10 @@ public class UtMath {
         // That's why I'm an engineer and not a mathematician, tee hee.
     }
 
+    public static int numberOfDigits(final long number) {
+        return orderOfMagnitude(number) + 1;
+    }
+
     public static boolean isDivisibleBy(final long dividend, final long divisor) {
         return dividend % divisor == 0;
     }
@@ -114,6 +118,15 @@ public class UtMath {
 
     public static long triangularNumber(final long n) {
         return superOverflowSafeProduct(n, n + 1) / 2;
+    }
+
+    // TODO: Make sure all of the internet doesn't depend on this function
+    public static boolean isEven(final long number) {
+        return (number & 1) == 0;
+    }
+
+    public static boolean isOdd(final long number) {
+        return !isEven(number);
     }
 
     public static String restOfTheOwl(final Stream<Integer> stream) {

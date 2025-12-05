@@ -7,6 +7,7 @@ import ch.thoenluk.ut.Position;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,25 +19,25 @@ public class PaperRollRollinator implements ChristmasSaver<Map<Position, Charact
     private static final Character PAPER = '@';
 
     @Override
-    public String saveChristmas(Map<Position, Character> input) {
-        final Map<Position, Character> paperLocations = filterToPaperLocations(input);
+    public String saveChristmas(final Map<Position, Character> input) {
+        final Set<Position> paperLocations = filterToPaperLocations(input);
         return Long.toString(findRemovablePaperLocations(paperLocations).count());
     }
 
-    private Stream<Position> findRemovablePaperLocations(Map<Position, Character> paperLocations) {
-        return paperLocations.keySet().stream()
-                .filter(position -> isAccessible(position, paperLocations));
+    private Stream<Position> findRemovablePaperLocations(final Set<Position> paperLocations) {
+        return paperLocations.stream().filter(position -> isAccessible(position, paperLocations));
     }
 
-    private static Map<Position, Character> filterToPaperLocations(Map<Position, Character> input) {
+    private static Set<Position> filterToPaperLocations(final Map<Position, Character> input) {
         return input.entrySet().stream()
                 .filter(entry -> entry.getValue().equals(PAPER))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
     }
 
     @Override
-    public String saveChristmasAgain(Map<Position, Character> input) {
-        final Map<Position, Character> paperLocations = filterToPaperLocations(input);
+    public String saveChristmasAgain(final Map<Position, Character> input) {
+        final Set<Position> paperLocations = filterToPaperLocations(input);
         int result = 0;
         List<Position> removablePapers;
         do {
@@ -47,9 +48,9 @@ public class PaperRollRollinator implements ChristmasSaver<Map<Position, Charact
         return Integer.toString(result);
     }
 
-    private boolean isAccessible(final Position position, final Map<Position, Character> map) {
+    private boolean isAccessible(final Position position, final Set<Position> map) {
         return position.getOmnidirectionalNeighbours().stream()
-                .filter(map::containsKey)
+                .filter(map::contains)
                 .count() < 4;
     }
 }

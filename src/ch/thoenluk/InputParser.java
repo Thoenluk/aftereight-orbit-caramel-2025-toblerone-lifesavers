@@ -6,6 +6,7 @@ import ch.thoenluk.ut.UtStrings;
 import java.util.function.Function;
 
 public enum InputParser {
+    EMPTY_LINE_SEPARATED_STRINGS(UtStrings::splitStringWithEmptyLines),
     COMMA_SEPARATED_STRINGS(UtStrings::splitCommaSeparatedString),
     MULTILINE_STRING(UtStrings::splitMultilineString),
     STREAMED_LINES(UtStrings::streamInputAsLines),

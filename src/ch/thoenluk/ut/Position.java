@@ -1,5 +1,6 @@
 package ch.thoenluk.ut;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,8 @@ public record Position(int y, int x) {
             LEFT, DOWN,
             UP, LEFT
     );
+
+    private static final Map<Position, List<Position>> NEIGHBOUR_CACHE = new HashMap<>();
 
 
     //---- Static Methods
@@ -87,7 +90,7 @@ public record Position(int y, int x) {
     }
 
     public List<Position> getOmnidirectionalNeighbours() {
-        return getNeighbours(NeighbourDirection.OMNIDIRECTIONAL);
+        return NEIGHBOUR_CACHE.computeIfAbsent(this, _ -> getNeighbours(NeighbourDirection.OMNIDIRECTIONAL));
     }
 
     public Position invert() {

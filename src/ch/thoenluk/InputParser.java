@@ -14,6 +14,7 @@ public enum InputParser {
     COMMA_SEPARATED_LONG_LIST(UtParsing::commaSeparatedStringToLongList),
     WHITESPACE_SEPARATED_INTEGER_LIST(UtParsing::whitespaceSeparatedStringToIntegerList),
     WHITESPACE_SEPARATED_LONG_LIST(UtParsing::whitespaceSeparatedStringToLongList),
+    MULTILINE_3D_POSITION_LIST(UtParsing::multilineStringToThreeDPositionList),
     MULTILINE_INTEGER_LIST(UtParsing::multilineStringToIntegerList),
     MULTILINE_POSITION_INTEGER_MAP(UtParsing::multilineStringToPositionIntegerMap),
     MULTILINE_POSITION_CHARACTER_MAP(UtParsing::multilineStringToPositionCharacterMap);

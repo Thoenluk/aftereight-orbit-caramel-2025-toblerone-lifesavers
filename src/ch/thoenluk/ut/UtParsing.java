@@ -91,6 +91,12 @@ public class UtParsing {
         return map;
     }
 
+    public static List<ThreeDPosition> multilineStringToThreeDPositionList(final String stringRepresentation) {
+        return UtStrings.streamInputAsLines(stringRepresentation)
+                .map(ThreeDPosition::fromString)
+                .toList();
+    }
+
     public static List<Integer> commaSeparatedStringToIntegerList(final String csv) {
         final String[] tokens = UtStrings.splitCommaSeparatedString(csv);
         final List<Integer> parsedList = new ArrayList<>();

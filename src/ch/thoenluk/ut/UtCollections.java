@@ -22,19 +22,19 @@ public class UtCollections {
                 .map(Map.Entry::getKey);
     }
 
-    public static <T> Stream<List<T>> streamPairwise(final List<T> list) {
+    public static <T> Stream<Pair<T>> streamPairwise(final List<T> list) {
         return IntStream.range(0, list.size())
                 .boxed()
                 .flatMap(index -> toPairs(list, index));
     }
 
-    private static <T> Stream<List<T>> toPairs(final List<T> list, final Integer index) {
+    private static <T> Stream<Pair<T>> toPairs(final List<T> list, final Integer index) {
         return list.subList(index + 1, list.size()).stream()
                 .map(secondElement -> makePair(list, index, secondElement));
     }
 
-    private static <T> List<T> makePair(final List<T> list, final Integer index, final T secondElement) {
-        return List.of(list.get(index), secondElement);
+    private static <T> Pair<T> makePair(final List<T> list, final Integer index, final T secondElement) {
+        return new Pair<>(list.get(index), secondElement);
     }
 
     public static <T> boolean anyOverlap(final Collection<T> first, final Collection<T> second) {
@@ -42,4 +42,6 @@ public class UtCollections {
         overlap.retainAll(second);
         return !overlap.isEmpty();
     }
+
+    public record Pair<T>(T first, T second) {}
 }

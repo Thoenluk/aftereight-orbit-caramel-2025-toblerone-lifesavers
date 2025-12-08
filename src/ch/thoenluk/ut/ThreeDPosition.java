@@ -2,10 +2,11 @@ package ch.thoenluk.ut;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
 
 public record ThreeDPosition(int x, int y, int z) {
-
     public static ThreeDPosition fromString(final String description) {
         final String[] coordinates = UtStrings.splitCommaSeparatedString(description);
         return new ThreeDPosition(UtParsing.cachedParseInt(coordinates[0]), UtParsing.cachedParseInt(coordinates[1]), UtParsing.cachedParseInt(coordinates[2]));
@@ -23,6 +24,15 @@ public record ThreeDPosition(int x, int y, int z) {
         return Math.abs(x() - other.x())
                 + Math.abs(y() - other.y())
                 + Math.abs(z() - other.z());
+    }
+
+    public long getSquaredStraightLineDistanceFrom(final ThreeDPosition other) {
+        return Stream.<Function<ThreeDPosition, Integer>>of(ThreeDPosition::x, ThreeDPosition::y, ThreeDPosition::z)
+                .map(function -> function.apply(this) - function.apply(other))
+                .mapToLong(i -> i)
+                .map(l -> l * l)
+                .reduce(UtMath::superOverflowSafeSum)
+                .orElseThrow(); // Now that's a function only a Java engineer could make!
     }
 
     public ThreeDPosition add(final ThreeDPosition other) {

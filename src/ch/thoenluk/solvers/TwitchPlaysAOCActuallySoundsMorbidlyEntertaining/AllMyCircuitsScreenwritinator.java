@@ -7,7 +7,6 @@ import ch.thoenluk.ut.ThreeDPosition;
 import ch.thoenluk.ut.UtCollections;
 import ch.thoenluk.ut.UtCollections.Pair;
 import ch.thoenluk.ut.UtMath;
-import ch.thoenluk.ut.UtStrings;
 
 import java.util.*;
 import java.util.function.Function;

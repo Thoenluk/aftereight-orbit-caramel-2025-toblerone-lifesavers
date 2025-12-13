@@ -91,6 +91,12 @@ public class UtParsing {
         return map;
     }
 
+    public static List<Position> multilineStringToPositionList(final String stringRepresentation) {
+        return Arrays.stream(UtStrings.splitMultilineString(stringRepresentation))
+                .map(Position::fromString)
+                .toList();
+    }
+
     public static List<ThreeDPosition> multilineStringToThreeDPositionList(final String stringRepresentation) {
         return UtStrings.streamInputAsLines(stringRepresentation)
                 .map(ThreeDPosition::fromString)

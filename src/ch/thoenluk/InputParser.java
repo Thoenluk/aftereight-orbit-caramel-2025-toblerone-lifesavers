@@ -10,7 +10,7 @@ public enum InputParser {
     COMMA_SEPARATED_STRINGS(UtStrings::splitCommaSeparatedString),
     MULTILINE_STRING(UtStrings::splitMultilineString),
     STREAMED_LINES(UtStrings::streamInputAsLines),
-    COMMA_SEPARATED_INTEGER_LIST(UtParsing::commaSeparatedStringToIntegerList),
+    COMMA_SEPARATED_INT_STREAM(UtParsing::commaSeparatedStringToIntStream),
     COMMA_SEPARATED_LONG_LIST(UtParsing::commaSeparatedStringToLongList),
     WHITESPACE_SEPARATED_INTEGER_LIST(UtParsing::whitespaceSeparatedStringToIntegerList),
     WHITESPACE_SEPARATED_LONG_LIST(UtParsing::whitespaceSeparatedStringToLongList),

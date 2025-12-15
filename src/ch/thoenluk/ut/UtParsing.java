@@ -1,6 +1,7 @@
 package ch.thoenluk.ut;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class UtParsing {
     private static final Map<String, Integer> STRING_INTEGER_CACHE = new HashMap<>();
@@ -103,13 +104,9 @@ public class UtParsing {
                 .toList();
     }
 
-    public static List<Integer> commaSeparatedStringToIntegerList(final String csv) {
-        final String[] tokens = UtStrings.splitCommaSeparatedString(csv);
-        final List<Integer> parsedList = new ArrayList<>();
-        for (final String token : tokens) {
-            parsedList.add(cachedParseInt(token));
-        }
-        return parsedList;
+    public static IntStream commaSeparatedStringToIntStream(final String csv) {
+        return Arrays.stream(UtStrings.splitCommaSeparatedString(csv))
+                .mapToInt(UtParsing::cachedParseInt);
     }
 
     public static List<Integer> whitespaceSeparatedStringToIntegerList(final String wss) {
